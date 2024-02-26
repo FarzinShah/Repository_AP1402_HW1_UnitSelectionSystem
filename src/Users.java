@@ -8,28 +8,40 @@ public class Users {
     private HashMap<String, String> student_usersList;
     private HashMap<String, String> admin_usersList;
     public Scanner sc = new Scanner(System.in);
-    private Student student;
+    public Scanner sc2 = new Scanner(System.in);
+    public Scanner sc3 = new Scanner(System.in);
+
+    private LinkedList<Student> students = new LinkedList<>();
+    private LinkedList<Admin> admins = new LinkedList<>();
+
+
     public Random random = new Random();
 
 
     public Users() {
         student_usersList = new HashMap<>();
         admin_usersList = new HashMap<>();
-        coursesList.add(0,new Course("Javad Ebrahimi","Algebra 1",22217,4,false,"Sun-Tue: 10:30 A.M. - 12:30 P.M.","1403/03/22 - 09:00 A.M.",10.5,12.5,9,12,31,40,1));
-        coursesList.add(1,new Course("M.R. Pournaki","Calculus 2",22016,4,false,"Sat-Mon: 10:30 A.M. - 12:30 P.M.","1403/03/24 - 09:00 A.M.",10.5,12.5,9,12,255,260,1));
-        coursesList.add(2,new Course("S.M. Gholamzadeh","Calculus 1",22015,4,false,"Sun-Tue: 3:00 P.M. - 5:00 P.M.","1403/03/29 - 03:30 P.M.",15,17,15.5,18,151,250,2));
-        coursesList.add(3,new Course("M. Ardeshir","Fundamental of Mathematics",22142,4,false,"Sun-Tue: 10:30 P.M. - 12:30 P.M.","1403/03/22 - 09:30 A.M.",10.5,12.5,9,12,70,70,1));
-        coursesList.add(4,new Course("S. Rahimi","Persian literature",31119,3,true,"Sat-Mon: 10:30 P.M. - 12:00 P.M.","1403/03/30 - 1:30 P.M.",10.5,12,13.5,14.5,55,56,2));
 
     }
 
-    public HashMap<String, String> getUsersList() {
+
+    public HashMap<String, String> getSUsersList() {
         return student_usersList;
     }
 
-    public void setUsersList(HashMap<String, String> usersList) {
+    public HashMap<String, String> getAUsersList() {
+        return admin_usersList;
+    }
+
+
+    public void setSUsersList(HashMap<String, String> usersList) {
         this.student_usersList = usersList;
     }
+
+    public void setAUsersList(HashMap<String, String> usersList) {
+        this.admin_usersList = usersList;
+    }
+
 
     public HashMap<String, String> getStudent_usersList() {
         return student_usersList;
@@ -51,52 +63,116 @@ public class Users {
         if (next.charAt(0) == 'A') {
             admin_usersList.put(next, next1);
             System.out.println("account is successfully created!");
-        } else if (next.charAt(0) == 'S') {
-            student_usersList.put(next, next1);
-            System.out.println("account is successfully created!");
             System.out.println("Enter your full name:");
             //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
-            String full_name = sc.nextLine();
+            String full_name = sc3.nextLine();
+            int default_id = 402900000;
+            System.out.println("Choose your post:");
+            System.out.println("1. Department Chair"); //  میتونه با عوض کردن اسم معاون، اونو عوضش کنه! درس خاص رو اضافه کنه!
+            System.out.println("2. Education Vice Chair"); // این ابراهیمیه!
+            System.out.println("3. Education Assistant"); // این بهزاده! کارش با ابراهیمی یکیه ولی برا حذف کردن درسا باید اجازه ازش داشته باشه.
+            int option = sc.nextInt();
+            if (option == 1) {
+                Integer personalCode = default_id + 10000 + random.nextInt(1, 999);
+                admins.add(new Admin(next, next1, full_name, personalCode, "Department Chair",true));
+                System.out.println("Your personal code is: " + personalCode);
+                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+            } else if (option == 2) {
+                Integer personalCode = default_id + 20000 + random.nextInt(1, 999);
+                admins.add(new Admin(next, next1, full_name, personalCode, "Education Vice Chair",false));
+                System.out.println("Your personal code is: " + personalCode);
+                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+            } else if (option == 3) {
+                Integer personalCode = default_id + 30000 + random.nextInt(1, 999);
+                admins.add(new Admin(next, next1, full_name, personalCode, "Education Assistant",false));
+                System.out.println("Your personal code is: " + personalCode);
+                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+            }
+        } else if (next.charAt(0) == 'S') {
+            student_usersList.put(next, next1);
+            boolean isPardis = false;
+            boolean isOlympiad = false;
+            System.out.println("account is successfully created!");
+            System.out.println("Enter your full name: ");
+            //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
+            String q = sc2.nextLine();
             int default_id = 402100000;
             System.out.println("Have you entered as a pardis student?");
             System.out.println("1. yes");
             System.out.println("2. no");
-            int yes_or_no = Integer.parseInt(sc.next());
+            int yes_or_no = sc.nextInt();
             if (yes_or_no == 1) {
                 default_id = 402170000;
                 System.out.println("fine! :)");
+                isPardis = true;
             }
             System.out.println("Have you entered as a medalist student?");
             System.out.println("1. yes");
             System.out.println("2. no");
-            Integer yes_or_no1 = sc.nextInt();
+            int yes_or_no1 = sc.nextInt();
             if (yes_or_no1 == 1 && yes_or_no != 1) {
                 default_id = 402110000;
                 System.out.println("fine! :)");
+                isOlympiad = true;
             } else if (yes_or_no == 1 && yes_or_no1 == 1) {
                 default_id = 402171000;
                 System.out.println("fine! :)");
+
             }
 
             Integer personal_code = default_id + random.nextInt(1, 999);
             System.out.println("Your personal code is: " + personal_code);
-            student = new Student(next, next1, full_name, personal_code);
+            students.add(new Student(next, next1, q, personal_code, isPardis, isOlympiad));
             System.out.println("Your registration is done! You should log In to continue.");
         }
     }
 
     public boolean isValidStudent(String username, String password) {
-        if (student_usersList.containsKey(username) && student_usersList.containsValue(password)) {
-            return true;
-        } else return false;
-
+        String isUsername = "";
+        String isPassword = "";
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getUsername().equals(username) && students.get(i).getPassword().equals(password) && student_usersList.containsKey(username) && student_usersList.containsValue(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public Student getStudent() {
-        return student;
+    public boolean isValidAdmin(String username, String password) {
+        String isUsername = "";
+        String isPassword = "";
+        for (int i = 0; i < admins.size(); i++) {
+            if (admins.get(i).getUsername().equals(username) && admins.get(i).getPassword().equals(password) && admin_usersList.containsKey(username) && admin_usersList.containsValue(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public LinkedList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(LinkedList<Student> students) {
+        this.students = students;
+    }
+
+    public LinkedList<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(LinkedList<Admin> admins) {
+        this.admins = admins;
+    }
+
+
+    public void courseRemover(int code_of_course, int number_of_group) {
+        for (int i = 0; i < coursesList.size(); i++) {
+            if (coursesList.get(i).getCode_of_Course() == code_of_course && coursesList.get(i).getNumber_of_group() == number_of_group) {
+                coursesList.remove(i);
+                System.out.println("The course removed Successfully!");
+            }
+        }
+
     }
 }
