@@ -75,18 +75,18 @@ public class Users {
             if (option == 1) {
                 Integer personalCode = default_id + 10000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Department Chair",true));
-                System.out.println("Your personal code is: " + personalCode);
-                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+                System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
+                System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             } else if (option == 2) {
                 Integer personalCode = default_id + 20000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Education Vice Chair",false));
-                System.out.println("Your personal code is: " + personalCode);
-                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+                System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
+                System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             } else if (option == 3) {
                 Integer personalCode = default_id + 30000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Education Assistant",false));
-                System.out.println("Your personal code is: " + personalCode);
-                System.out.println("Your registration is done! You should log In to continue. Welcome!");
+                System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
+                System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             }
         } else if (next.charAt(0) == 'S') {
             student_usersList.put(next, next1);
@@ -121,9 +121,9 @@ public class Users {
             }
 
             Integer personal_code = default_id + random.nextInt(1, 999);
-            System.out.println("Your personal code is: " + personal_code);
+            System.out.println("Your personal code is: " +"\u001B[33m"+ personal_code + "\u001B[0m");
             students.add(new Student(next, next1, q, personal_code, isPardis, isOlympiad));
-            System.out.println("Your registration is done! You should log In to continue.");
+            System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
         }
     }
 

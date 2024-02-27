@@ -4,7 +4,7 @@ public class Student extends Client {
     private boolean isPardis;
     private boolean isOlympiad;
     public LinkedList<Course> selected_courses = new LinkedList<>();
-    public Users users = Main.users;
+    public Users users = Application.users;
 
     public Student(String username, String password, String full_name, Integer personal_code, boolean isPardis, boolean isOlympiad) {
         super(username, password, full_name, personal_code);
