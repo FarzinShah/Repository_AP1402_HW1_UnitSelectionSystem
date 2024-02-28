@@ -1,3 +1,5 @@
+package components;
+
 import java.util.*;
 
 public class Admin extends Client{
@@ -9,6 +11,7 @@ public class Admin extends Client{
         this.post = post;
         this.isDepartmentChair = isDepartmentChair;
     }
+
 
     public Map<Map<String, String>, Integer> getPersonalisation() {
         return personalisation;

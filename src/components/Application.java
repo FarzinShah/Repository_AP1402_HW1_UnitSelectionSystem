@@ -1,3 +1,5 @@
+package components;
+
 import java.util.Scanner;
 
 public class Application {
@@ -24,15 +26,16 @@ public class Application {
         setDefaultCourses();
         System.out.println(Magenta+"Hi! Welcome to the System of unit selection" +RESET+" - "+YELLOW+" Version 1.0.0"+RESET);
         System.out.println(Cyan+"All rights reserved "+"\u001B[29m"+"@c -2024"+RESET);
-        System.out.println(RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RED+"0"+GREEN+"~"+RESET);
+        HelperMethods helperMethods = new HelperMethods();
+        helperMethods.ColorfulSector();
 
         while (boo1) {
             boo3 = true;
             System.out.println("Choose one option:"+RESET);
             System.out.println("1. Sign Up");
             System.out.println("2. Log In");
-            int input = sc.nextInt();
 
+            int input = sc.nextInt();
             if (input == 1) {
                 if (alert_controller == 0) {
                     System.out.println("Alert: if you sign as an admin, your username most start with 'A'.  if you sign as a student, your username most start with 'S' ");
@@ -55,6 +58,7 @@ public class Application {
 //                            break;
                     } else {
                         users.setUsersListArguments(next, next1);
+                        helperMethods.HatSector();
                         break;
                     }
 
@@ -63,7 +67,7 @@ public class Application {
 
             } else if (input == 2) {
                 if (users.getSUsersList().isEmpty() && users.getAUsersList().isEmpty()) {
-                    System.out.println("Error: There is no user made!");
+                    System.out.println(RED+"Error:"+RESET+" There is no user made!");
                 } else {
                     while (true) {
                         if(!boo3){
@@ -86,6 +90,7 @@ public class Application {
                                         index=i;
                                     }
                                 }
+                                helperMethods.HatSector();
                                 while (true){
                                     if(users.getAdmins().get(index).isDepartmentChair()){
                                         System.out.println("Choose one option:");
@@ -107,29 +112,14 @@ public class Application {
                                     System.out.println("8. Log out");
                                     int option = sc.nextInt();
                                     if(option == 1){
-                                        for (int i = 0; i < users.coursesList.size(); i++) {
-                                            System.out.print(users.coursesList.get(i).getCode_of_Course() + " - " + users.coursesList.get(i).getName_of_Course() + " - Group: " + users.coursesList.get(i).getNumber_of_group() + " - " + users.coursesList.get(i).getName_of_Lecturer() + " - Date of class: " + users.coursesList.get(i).getDate_of_class() + " - Date of final exam: " + users.coursesList.get(i).getDate_of_exam());
-//                                        if(users.coursesList.get(i).isGeneral()){
-//                                            System.out.println(YELLOW +"This course is general"+RESET);
-//                                        }
-                                            if (users.coursesList.get(i).getCapacity() == users.coursesList.get(i).getMax_capacity()) {
-                                                System.out.print(" - Capacity: " + RED + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            } else if (users.coursesList.get(i).getCapacity() >= users.coursesList.get(i).getMax_capacity() - 5 && users.coursesList.get(i).getCapacity() <= users.coursesList.get(i).getMax_capacity()) {
-                                                System.out.print(" - Capacity: " + YELLOW + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            } else {
-                                                System.out.print(" - Capacity: " + GREEN + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            }
-                                        }
+                                        listOfPresentedCourses();
                                     }
                                     if(option == 2){
                                         System.out.println("Enter the name of Lecturer: ");
                                         String name_of_Lecturer = sc.next();
                                         System.out.println("Enter the name_of_Course: ");
                                         String name_of_Course = sc.next();
-                                        System.out.println("Enter the code of Course: ");
+                                        System.out.println("Enter the code of practicial_classes.Course: ");
                                         int code_of_Course = sc.nextInt();
                                         System.out.println("Enter the number of units: ");
                                         int number_of_units = sc.nextInt();
@@ -167,7 +157,7 @@ public class Application {
                                         int personal_code = sc.nextInt();
                                         System.out.println("The presented courses are these: ");
                                         listOfPresentedCourses();
-                                        System.out.println("----------------------------------------*----------------------------------------");
+                                        helperMethods.HatSector();
                                         System.out.println("Enter the code of course: ");
                                         int code_of_course = sc.nextInt();
                                         System.out.println("Enter the number of group: ");
@@ -182,7 +172,7 @@ public class Application {
                                     if(option == 4){
                                         System.out.println("The presented courses are these: ");
                                         listOfPresentedCourses();
-                                        System.out.println("----------------------------------------*----------------------------------------");
+                                        helperMethods.HatSector();
                                         System.out.println("Enter the code of course: ");
                                         int code_of_course = sc.nextInt();
                                         System.out.println("Enter the number of group: ");
@@ -194,12 +184,12 @@ public class Application {
                                         System.out.println("Your personal code is: " + users.getAdmins().get(index).getPersonal_code());
                                         System.out.println("Your Username is: " + users.getAdmins().get(index).getUsername());
                                         System.out.println("Your Password is: " + users.getAdmins().get(index).getPassword());
-
+                                        helperMethods.HatSector();
                                     }
                                     if(option == 8){
                                         boo3 = false;
-                                        System.out.println("You logged out. Have a good time!");
-                                        System.out.println("-----------------------------------------*-----------------------------------------");
+                                        System.out.println(YELLOW +"You logged out."+RESET+" Have a good time!");
+                                        helperMethods.HatSector();
                                         break;
 
                                     }
@@ -229,24 +219,11 @@ public class Application {
                                     int option = sc.nextInt();
                                     if(option == 1){
                                         users.getStudents().get(index).show_menu_of_SelectedCourses();
+                                        helperMethods.HatSector();
                                     }
                                     if (option == 2) {
-                                        for (int i = 0; i < users.coursesList.size(); i++) {
-                                            System.out.print(users.coursesList.get(i).getCode_of_Course() + " - " + users.coursesList.get(i).getName_of_Course() + " - Group: " + users.coursesList.get(i).getNumber_of_group() + " - " + users.coursesList.get(i).getName_of_Lecturer() + " - Date of class: " + users.coursesList.get(i).getDate_of_class() + " - Date of final exam: " + users.coursesList.get(i).getDate_of_exam());
-//                                        if(users.coursesList.get(i).isGeneral()){
-//                                            System.out.println(YELLOW +"This course is general"+RESET);
-//                                        }
-                                            if (users.coursesList.get(i).getCapacity() == users.coursesList.get(i).getMax_capacity()) {
-                                                System.out.print(" - Capacity: " + RED + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            } else if (users.coursesList.get(i).getCapacity() >= users.coursesList.get(i).getMax_capacity() - 5 && users.coursesList.get(i).getCapacity() <= users.coursesList.get(i).getMax_capacity()) {
-                                                System.out.print(" - Capacity: " + YELLOW + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            } else {
-                                                System.out.print(" - Capacity: " + GREEN + users.coursesList.get(i).getCapacity() + RESET);
-                                                System.out.println();
-                                            }
-                                        }
+
+                                       listOfPresentedCourses();
 
                                     } else if (option == 3) {
                                         System.out.println("Enter the code of course: ");
@@ -258,15 +235,15 @@ public class Application {
                                             if (users.getStudents().get(i).getUsername().equals(next)) {
                                                 users.getStudents().get(i).addCourse(code_of_course, number_of_group);
                                             }
-
                                         }
-
+                                        helperMethods.HatSector();
                                     }else if(option == 4){
                                         System.out.println("Enter the code of course: ");
                                         int code_of_course = sc.nextInt();
                                         System.out.println("Enter the number of group: ");
                                         int number_of_group = sc.nextInt();
                                         users.getStudents().get(index).deleteCourse(code_of_course,number_of_group);
+                                        helperMethods.HatSector();
                                     }
                                     else if(option == 5){
                                         System.out.println("Your full name is: " + users.getStudents().get(index).getFull_name());
@@ -284,26 +261,30 @@ public class Application {
                                         }else System.out.print("Entrance exam");
                                         System.out.println();
                                     }else if(option == 8){
-                                        System.out.println("You logged out. Have a good time!");
-                                        System.out.println("-----------------------------------------*-----------------------------------------");
+                                        System.out.println(YELLOW +"You logged out."+RESET+" Have a good time!");
+                                        helperMethods.HatSector();
                                         break;
                                     }
 
                                 }
                             } else {
                                 System.out.println("Maybe your username or password is incorrect. Try again!");
+                                helperMethods.HatSector();
+
                             }
                         }
                     }
                 }
 
             } else {
-                System.out.println("Try again!");
+                System.out.println(RED+"Try again!"+RESET);
+
             }
 
         }
     }
     public static void setDefaultCourses(){
+        Users users = new Users();
         users.coursesList.add(0, new Course("Javad Ebrahimi", "Algebra 1", 22217, 4, false, "Sun-Tue: 10:30 A.M. - 12:30 P.M.", "1403/03/22 - 09:00 A.M.", 10.5, 12.5, 9, 12, 31, 40, 1));
         users.coursesList.add(1, new Course("M.R. Pournaki", "Calculus 2", 22016, 4, false, "Sat-Mon: 10:30 A.M. - 12:30 P.M.", "1403/03/24 - 09:00 A.M.", 10.5, 12.5, 9, 12, 255, 260, 1));
         users.coursesList.add(2, new Course("S.M. Gholamzadeh", "Calculus 1", 22015, 4, false, "Sun-Tue: 3:00 P.M. - 5:00 P.M.", "1403/03/29 - 03:30 P.M.", 15, 17, 15.5, 18, 151, 250, 2));
@@ -313,12 +294,14 @@ public class Application {
     }
 
     public static void listOfPresentedCourses(){
+        Users users = new Users();
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
-        String GREEN = "\u001B[32m";
+        String GREEN = "\033[1;92m";
         String YELLOW = "\u001B[33m";
+        String Magenta= "\033[47m";
         for (int i = 0; i < users.coursesList.size(); i++) {
-            System.out.print(users.coursesList.get(i).getCode_of_Course() + " - " + users.coursesList.get(i).getName_of_Course() + " - Group: " + users.coursesList.get(i).getNumber_of_group() + " - " + users.coursesList.get(i).getName_of_Lecturer() + " - Date of class: " + users.coursesList.get(i).getDate_of_class() + " - Date of final exam: " + users.coursesList.get(i).getDate_of_exam());
+            System.out.print(Magenta+users.coursesList.get(i).getCode_of_Course() + " - " + users.coursesList.get(i).getName_of_Course() + " -"+Magenta+" Group: " + users.coursesList.get(i).getNumber_of_group() + " - " + users.coursesList.get(i).getName_of_Lecturer() + " -"+Magenta+" Date of class: " + users.coursesList.get(i).getDate_of_class() + " -" + Magenta + " Date of final exam: " + users.coursesList.get(i).getDate_of_exam() +RESET);
 //                                        if(users.coursesList.get(i).isGeneral()){
 //                                            System.out.println(YELLOW +"This course is general"+RESET);
 //                                        }
@@ -332,6 +315,9 @@ public class Application {
                 System.out.print(" - Capacity: " + GREEN + users.coursesList.get(i).getCapacity() + RESET);
                 System.out.println();
             }
+            HelperMethods helperMethods = new HelperMethods();
+            helperMethods.HatSector();
+
         }
     }
 }

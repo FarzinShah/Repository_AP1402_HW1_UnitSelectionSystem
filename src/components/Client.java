@@ -1,3 +1,5 @@
+package components;
+
 public abstract class Client {
     private String username;
     private String password;

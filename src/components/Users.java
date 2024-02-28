@@ -1,3 +1,7 @@
+package components;
+
+import components.working_with_file_and_folders.FileManager;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -10,7 +14,7 @@ public class Users {
     public Scanner sc = new Scanner(System.in);
     public Scanner sc2 = new Scanner(System.in);
     public Scanner sc3 = new Scanner(System.in);
-
+    public FileManager fileManager = new FileManager();
     private LinkedList<Student> students = new LinkedList<>();
     private LinkedList<Admin> admins = new LinkedList<>();
 
@@ -60,9 +64,11 @@ public class Users {
     }
 
     public void setUsersListArguments(String next, String next1) {
+        HelperMethods helperMethods = new HelperMethods();
         if (next.charAt(0) == 'A') {
             admin_usersList.put(next, next1);
-            System.out.println("account is successfully created!");
+            System.out.println("Your account is successfully created!");
+            helperMethods.HatSector();
             System.out.println("Enter your full name:");
             //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
             String full_name = sc3.nextLine();
@@ -75,16 +81,19 @@ public class Users {
             if (option == 1) {
                 Integer personalCode = default_id + 10000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Department Chair",true));
+                fileManager.createUserFolderOnUserSignupIfAdmin(next, next1, full_name, personalCode, "Education Vice Chair",false);
                 System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
                 System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             } else if (option == 2) {
                 Integer personalCode = default_id + 20000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Education Vice Chair",false));
+                fileManager.createUserFolderOnUserSignupIfAdmin(next, next1, full_name, personalCode, "Education Vice Chair",false);
                 System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
                 System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             } else if (option == 3) {
                 Integer personalCode = default_id + 30000 + random.nextInt(1, 999);
                 admins.add(new Admin(next, next1, full_name, personalCode, "Education Assistant",false));
+                fileManager.createUserFolderOnUserSignupIfAdmin(next, next1, full_name, personalCode, "Education Assistant",false);
                 System.out.println("Your personal code is: " +"\u001B[33m"+ personalCode + "\u001B[0m");
                 System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
             }
@@ -93,6 +102,7 @@ public class Users {
             boolean isPardis = false;
             boolean isOlympiad = false;
             System.out.println("account is successfully created!");
+            helperMethods.HatSector();
             System.out.println("Enter your full name: ");
             //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
             String q = sc2.nextLine();
@@ -123,6 +133,7 @@ public class Users {
             Integer personal_code = default_id + random.nextInt(1, 999);
             System.out.println("Your personal code is: " +"\u001B[33m"+ personal_code + "\u001B[0m");
             students.add(new Student(next, next1, q, personal_code, isPardis, isOlympiad));
+            fileManager.createUserFolderOnUserSignupIfStudent(next, next1, q, personal_code, isPardis, isOlympiad);
             System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
         }
     }
@@ -165,6 +176,12 @@ public class Users {
         this.admins = admins;
     }
 
+    public void setOneAdmin(Admin admin){
+        admins.add(admin);
+    }
+    public void setOneStudent(Student student){
+        students.add(student);
+    }
 
     public void courseRemover(int code_of_course, int number_of_group) {
         for (int i = 0; i < coursesList.size(); i++) {

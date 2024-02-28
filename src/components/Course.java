@@ -1,3 +1,5 @@
+package components;
+
 public class Course {
     private String name_of_Lecturer;
     private String name_of_Course;

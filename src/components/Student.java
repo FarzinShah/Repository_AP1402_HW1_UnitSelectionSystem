@@ -1,3 +1,5 @@
+package components;
+
 import java.util.LinkedList;
 
 public class Student extends Client {
@@ -40,7 +42,7 @@ public class Student extends Client {
                     users.coursesList.get(i).setCapacity((users.coursesList.get(i).getCapacity() + 1));
 
                 } else {
-                    isNotExist = "Course Not Found!";
+                    isNotExist = "practicial_classes.Course Not Found!";
                 }
             }
 

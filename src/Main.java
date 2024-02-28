@@ -1,5 +1,8 @@
+import components.Application;
+
 public class Main {
     public static void main(String[] args) {
-        Application application = new Application();
+        //AP2024-HW1 -  Version 1.0.0:
+        new Application();
     }
 }
