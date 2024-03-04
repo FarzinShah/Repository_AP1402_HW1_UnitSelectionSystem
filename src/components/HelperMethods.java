@@ -1,5 +1,8 @@
 package components;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class HelperMethods {
     public void ColorfulSector(){
         String RESET = "\u001B[0m";
@@ -43,6 +46,31 @@ public class HelperMethods {
                 "\u001B[35m"+"~^"+ "\u001B[33m"+"~^"+"\u001B[35m"+"~^"+"\u001B[33m"+"~^"+"\u001B[35m"+"~^"+"\u001B[33m"+"~^"+
                 "\u001B[35m"+"~^"+ "\u001B[33m"+"~^"+"\u001B[35m"+"~^"+"\u001B[33m"+"~^"+"\u001B[35m"+"~^"+"\u001B[33m"+"~^"+
                 "\u001B[35m"+"~^"+ "\u001B[0m");
+    }
+    public void ContactUs(){
+        System.out.println("Department of Mathematical Sciences Sharif University of Technology,\n" +
+                "P. O. Box 11155-9415, Tehran, Iran. ");
+        System.out.println("Designer: "+"FarzinShah :)" + " - GMAIL: @ farzin.sh2016");
+
+    }
+    public void date(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+//        System.out.println("Before formatting: " + myDateObj);
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        String formattedDate = myDateObj.format(myFormatObj);
+        System.out.println("\u001B[36m" + formattedDate + "\u001B[2m");
+    }
+    public String date1(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+//        System.out.println("Before formatting: " + myDateObj);
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        String formattedDate = myDateObj.format(myFormatObj);
+        return (formattedDate);
+    }
+    public void defaultCourses(){
+
     }
 
 }

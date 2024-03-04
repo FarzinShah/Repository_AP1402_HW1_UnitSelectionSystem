@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 public class Users {
     public LinkedList<Course> coursesList = new LinkedList<>();
+    public LinkedList<Course> coursesListMath = new LinkedList<>();
+    public LinkedList<Course> coursesListCE = new LinkedList<>();
+    public LinkedList<Course> coursesListEE = new LinkedList<>();
+    public LinkedList<Course> coursesListLan = new LinkedList<>();
+
     private HashMap<String, String> student_usersList;
     private HashMap<String, String> admin_usersList;
     public Scanner sc = new Scanner(System.in);
@@ -107,6 +112,7 @@ public class Users {
             //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
             String q = sc2.nextLine();
             int default_id = 402100000;
+
             System.out.println("Have you entered as a pardis student?");
             System.out.println("1. yes");
             System.out.println("2. no");
@@ -187,7 +193,7 @@ public class Users {
         for (int i = 0; i < coursesList.size(); i++) {
             if (coursesList.get(i).getCode_of_Course() == code_of_course && coursesList.get(i).getNumber_of_group() == number_of_group) {
                 coursesList.remove(i);
-                System.out.println("The course removed Successfully!");
+                System.out.println("\u001B[32m"+"The course removed Successfully!"+"\u001B[0m");
             }
         }
 

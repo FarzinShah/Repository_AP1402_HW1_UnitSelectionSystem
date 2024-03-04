@@ -68,10 +68,14 @@ public class Student extends Client {
     }
 
     public void show_menu_of_SelectedCourses() {
+        HelperMethods helperMethods = new HelperMethods();
+        System.out.println("----------------------------------------"+"\u001B[35m"+"*"+"\u001B[0m"+"------------------------------------------");
         for (int i = 1; i < selected_courses.size() + 1; i++) {
-            System.out.println(i + ". " + selected_courses.get(i - 1).getName_of_Course());
+            System.out.println(i + ". " +"\u001B[33m"+selected_courses.get(i - 1).getCode_of_Course()+"\u001B[0m"+" - "+ selected_courses.get(i - 1).getName_of_Course());
         }
-        System.out.println("----------------------------------------*------------------------------------------");
+        System.out.println("----------------------------------------"+"\u001B[35m"+"*"+"\u001B[0m"+"------------------------------------------");
+
+//        helperMethods.HatSector();
     }
 
 }
