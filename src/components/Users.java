@@ -13,7 +13,8 @@ public class Users {
     public LinkedList<Course> coursesListCE = new LinkedList<>();
     public LinkedList<Course> coursesListEE = new LinkedList<>();
     public LinkedList<Course> coursesListLan = new LinkedList<>();
-
+    public HashMap<Integer,LinkedList<Integer>> courseCodeToPersonalCodes = new HashMap<>();
+    public LinkedList<DatabaseOfCourse> databaseOfCourses = new LinkedList<>();
     private HashMap<String, String> student_usersList;
     private HashMap<String, String> admin_usersList;
     public Scanner sc = new Scanner(System.in);
@@ -67,7 +68,12 @@ public class Users {
     public void setAdmin_usersList(HashMap<String, String> admin_usersList) {
         this.admin_usersList = admin_usersList;
     }
+    public void setDefaultAdminArgument(String next, String next1) {
+        admin_usersList.put(next, next1);
+        admins.add(new Admin(next, next1, "John Forbes", 402600001, "Central Admin",false));
+        fileManager.createUserFolderOnUserSignupIfAdmin(next, next1, "John Forbes", 402600001, "Central Admin",false);
 
+    }
     public void setUsersListArguments(String next, String next1) {
         HelperMethods helperMethods = new HelperMethods();
         if (next.charAt(0) == 'A') {

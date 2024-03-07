@@ -31,7 +31,7 @@ public class Student extends Client {
         isOlympiad = olympiad;
     }
 
-    public void addCourse(int code_of_course, int number_of_group) {
+    public void addCourse(int code_of_course, int number_of_group,Integer personalCode) {
 
         String isNotExist = "\n";
         for (int i = 0; i < users.coursesList.size(); i++) {
@@ -40,9 +40,9 @@ public class Student extends Client {
                     selected_courses.add(users.coursesList.get(i));
                     System.out.println("The course added successfully!");
                     users.coursesList.get(i).setCapacity((users.coursesList.get(i).getCapacity() + 1));
-
+                    users.databaseOfCourses.add(new DatabaseOfCourse(personalCode,code_of_course));
                 } else {
-                    isNotExist = "practicial_classes.Course Not Found!";
+                    isNotExist = "Course Not Found!";
                 }
             }
 
@@ -60,8 +60,7 @@ public class Student extends Client {
                     users.coursesList.get(i).setCapacity((users.coursesList.get(i).getCapacity() - 1));
 
                 } else {
-
-
+                    System.out.println("Deletion is Failed. Try Again!");
                 }
             }
         }
