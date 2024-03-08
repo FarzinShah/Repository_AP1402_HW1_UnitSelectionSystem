@@ -1,6 +1,7 @@
-package components;
+package components.maincontent;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Student extends Client {
     private boolean isPardis;
@@ -66,6 +67,34 @@ public class Student extends Client {
         }
     }
 
+    public boolean isLessThan5General(Integer personalCode){
+        Integer sumOfUnits = 0;
+        for (int i = 0; i < users.getStudents().size(); i++) {
+            if (Objects.equals(users.getStudents().get(i).getPersonal_code(), personalCode)) {
+                for (int j = 0; j < users.getStudents().get(i).selected_courses.size(); j++) {
+                    if (users.getStudents().get(i).selected_courses.get(j).isGeneral()){
+                        sumOfUnits+=users.getStudents().get(i).selected_courses.get(j).getNumber_of_units();
+                    }
+                }
+            }
+        }
+        if(sumOfUnits<=5){
+            return true;
+        }else return false;
+    }
+    public boolean isLessThan20(Integer personalCode){
+        Integer sumOfUnits = 0;
+        for (int i = 0; i < users.getStudents().size(); i++) {
+            if(Objects.equals(users.getStudents().get(i).getPersonal_code(), personalCode)){
+                for (int j = 0; j < users.getStudents().get(i).selected_courses.size(); j++) {
+                    sumOfUnits+=users.getStudents().get(i).selected_courses.get(j).getNumber_of_units();
+                }
+            }
+        }
+        if (sumOfUnits<=20){
+            return true;
+        }else return false;
+    }
     public void show_menu_of_SelectedCourses() {
         HelperMethods helperMethods = new HelperMethods();
         System.out.println("----------------------------------------"+"\u001B[35m"+"*"+"\u001B[0m"+"------------------------------------------");

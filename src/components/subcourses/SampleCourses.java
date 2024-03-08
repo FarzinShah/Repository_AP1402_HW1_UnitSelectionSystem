@@ -1,14 +1,13 @@
-package components;
+package components.subcourses;
 
 import java.util.LinkedList;
 
-public class Course {
+public abstract class SampleCourses {
     private LinkedList<Integer> studentsPersonalCode = new LinkedList<>();
     private String name_of_Lecturer;
     private String name_of_Course;
     private int code_of_Course;
     private int number_of_units;
-    private boolean isGeneral;
     private String date_of_class;
     private String date_of_exam;
     private double starting_time_of_class;
@@ -18,15 +17,14 @@ public class Course {
     private int capacity;
     private int max_capacity;
     private int number_of_group;
-    public Course(Integer personalCode){
+    public SampleCourses(Integer personalCode){
         studentsPersonalCode.add(personalCode);
     }
-    public Course(String name_of_Lecturer, String name_of_Course, int code_of_Course, int number_of_units, boolean isGeneral, String date_of_class, String date_of_exam, double starting_time_of_class, double finishing_time_of_class, double starting_time_of_exam, double finishing_time_of_exam, int capacity, int max_capacity, int number_of_group) {
+    public SampleCourses(String name_of_Lecturer, String name_of_Course, int code_of_Course, int number_of_units, String date_of_class, String date_of_exam, double starting_time_of_class, double finishing_time_of_class, double starting_time_of_exam, double finishing_time_of_exam, int capacity, int max_capacity, int number_of_group) {
         this.name_of_Lecturer = name_of_Lecturer;
         this.name_of_Course = name_of_Course;
         this.code_of_Course = code_of_Course;
         this.number_of_units = number_of_units;
-        this.isGeneral = isGeneral;
         this.date_of_class = date_of_class;
         this.date_of_exam = date_of_exam;
         this.starting_time_of_class = starting_time_of_class;
@@ -72,14 +70,6 @@ public class Course {
 
     public void setNumber_of_units(int number_of_units) {
         this.number_of_units = number_of_units;
-    }
-
-    public boolean isGeneral() {
-        return isGeneral;
-    }
-
-    public void setGeneral(boolean general) {
-        isGeneral = general;
     }
 
     public String getDate_of_class() {
@@ -161,4 +151,5 @@ public class Course {
     public void setStudentsPersonalCode(LinkedList<Integer> studentsPersonalCode) {
         this.studentsPersonalCode = studentsPersonalCode;
     }
+
 }

@@ -1,7 +1,8 @@
-package components;
+package components.maincontent;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class HelperMethods {
     public void ColorfulSector(){
@@ -136,5 +137,39 @@ public class HelperMethods {
         users.databaseOfCourses.add(new DatabaseOfCourse(402100363, 22016));
         users.databaseOfCourses.add(new DatabaseOfCourse(402100374, 22016));
     }
+    public boolean courseInterference(Integer personalCode,Integer codeOfCourse, Users users){
+        String dateOfClass = "";
+        String dateOfExam = "";
+        double startOfClass = 0 , finishOfClass = 0 , startOfExam = 0, finishOfExam = 0;
+        for (int i = 0; i < users.coursesList.size(); i++) {
+            if(users.coursesList.get(i).getCode_of_Course()==codeOfCourse){
+                dateOfClass = users.coursesList.get(i).getDate_of_class();
+                dateOfExam = users.coursesList.get(i).getDate_of_exam();
+                startOfClass = users.coursesList.get(i).getStarting_time_of_class();
+                finishOfClass = users.coursesList.get(i).getFinishing_time_of_class();
+                startOfExam = users.coursesList.get(i).getStarting_time_of_exam();
+                finishOfExam = users.coursesList.get(i).getFinishing_time_of_exam();
+            }
+        }
 
+        for (int i = 0; i < users.getStudents().size(); i++) {
+            if (Objects.equals(users.getStudents().get(i).getPersonal_code(), personalCode)) {
+                for (int j = 0; j < users.getStudents().get(i).selected_courses.size(); j++) {
+                    if(users.getStudents().get(i).selected_courses.get(j).getCode_of_Course()==codeOfCourse){
+                        if((users.getStudents().get(i).selected_courses.get(j).getDate_of_class().substring(0,3).equals(dateOfClass.substring(0,3)))){
+                            if((users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()>=startOfClass && users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()<finishOfClass)||((users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()<=startOfClass && users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_class()<finishOfClass && users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_class()>startOfClass)||(users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()>startOfClass&&users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()<finishOfClass)||(finishOfClass<users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_class() && startOfClass>users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_class()))){
+                                return false;
+                            }
+                        }
+                    }
+                    if (users.getStudents().get(i).selected_courses.get(j).getDate_of_exam().substring(0,10).equals(dateOfExam.substring(0,10))){
+                        if((users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()>=startOfExam && users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()<finishOfExam)||((users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()<=startOfExam && users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_exam()<finishOfExam && users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_exam()>startOfExam)||(users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()>startOfExam&&users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()<finishOfExam)||(finishOfExam<users.getStudents().get(i).selected_courses.get(j).getFinishing_time_of_exam() && startOfExam>users.getStudents().get(i).selected_courses.get(j).getStarting_time_of_exam()))){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }

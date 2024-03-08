@@ -1,18 +1,15 @@
 package components.working_with_file_and_folders;
 
-import components.*;
+import components.maincontent.*;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
 public class FileManager {
     private final String relativePath = "src/components/working_with_file_and_folders/logs_of_clients/";
     private final String relativePath2 = "src/components/working_with_file_and_folders/logs_of_courses/";
     private final String relativePath3 = "src/components/working_with_file_and_folders/logs_of_clients/admins/staticAdmin.txt";
-
+    private final String relativePath4 = "src/components/working_with_file_and_folders/logs_of_clients/students/students_logs.txt";
     private LinkedList<File> usersFiles= new LinkedList<>();
     private final File usersTextFile = new File(relativePath + "logs_of_clients.txt");
     private final File mainCourseFile = new File(relativePath2 + "maincourses.txt");
@@ -34,22 +31,14 @@ public class FileManager {
 
     public void createUserFolderOnUserSignupIfStudent(String username, String password, String full_name, Integer personal_code, boolean isPardis, boolean isOlympiad) {
         HelperMethods helperMethods = new HelperMethods();
-        try (FileWriter writer = new FileWriter(usersTextFile, true);FileWriter writer2 = new FileWriter(studentFileMaker(username),true)) {
-            if(isOlympiad && !isPardis) {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "YES" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "YES" + "\n");}
-            else if(isOlympiad && isPardis) {writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "YES" + "\n");writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "YES" + "\n");}
-            else if(!isOlympiad && isPardis) {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "NO" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "NO" + "\n");}
-            else {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "NO" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "NO" + "\n");}
+        try (FileWriter writer = new FileWriter(usersTextFile, true);FileWriter writer2 = new FileWriter(studentFileMaker(username),true);FileWriter writer3 = new FileWriter(relativePath4,true)) {
+            if(isOlympiad && !isPardis) {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "YES" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "YES" + "\n");writer3.write(username + "@" + password + "@ ~ " + helperMethods.date1() +"\n");}
+            else if(isOlympiad && isPardis) {writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "YES" + "\n");writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "YES" + "\n");writer3.write(username + "@" + password + "@ ~ " + helperMethods.date1() +"\n");}
+            else if(!isOlympiad && isPardis) {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "NO" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "YES" + "@" + "NO" + "\n");writer3.write(username + "@" + password + "@ ~ " + helperMethods.date1() +"\n");}
+            else {writer.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "NO" + "\n");writer2.write(username + "@" + password + "@" + full_name + "@" + personal_code + "@" + "NO" + "@" + "NO" + "\n");writer3.write(username + "@" + password + "@ ~ " + helperMethods.date1() +"\n");}
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        File userFolder = new File(relativePath +"students/"+ username);
-//        if (!userFolder.mkdir()) return;
-//        File file = new File(relativePath + username + "/" + "students.txt");
-//        try (FileWriter writer = new FileWriter(file)) {
-////            writer.write(username + ":" + password);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
     public void readMainAdmin(Users users){
         try {
@@ -67,7 +56,8 @@ public class FileManager {
         }
     }
 
-    public void readCoursesFromCoursesText(Users users1){
+    public void readCoursesFromCoursesText2(Users users1){
+
         try {
             FileReader fileReader = new FileReader(mainCourseFile2);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -86,6 +76,8 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+
     public void readUserFromUsersText() {
         try {
             Users users1 = new Users();

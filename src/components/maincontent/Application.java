@@ -1,4 +1,4 @@
-package components;
+package components.maincontent;
 
 import components.working_with_file_and_folders.FileManager;
 
@@ -31,7 +31,7 @@ public class Application {
         FileManager fileManager = new FileManager();
         int alert_controller = 0;
 //        setDefaultCourses();
-        fileManager.readCoursesFromCoursesText(users);
+        fileManager.readCoursesFromCoursesText2(users);
         addDefaultCoursesToFile();
         fileManager.readMainAdmin(users);
         helperMethods.defaultDatabase(users);
@@ -361,33 +361,46 @@ public class Application {
                                     System.out.println("3. Select the units");
                                     System.out.println("4. Delete the units");
                                     System.out.println("5. Show the personal information");
-                                    System.out.println("6. Settings");
-                                    System.out.println("7. Contact us");
-                                    System.out.println("8. Log out");
+                                    System.out.println("6. Contact us");
+                                    System.out.println("7. Log out");
                                     int option = sc.nextInt();
                                     if (option == 1) {
                                         if (users.getStudents().get(index).selected_courses.isEmpty()) {
-                                            System.out.println(RED + "Error:" + "You have selected any course yet!" + RESET);
+                                            System.out.println(RED + "Error:" + RESET + "You have selected any course yet!" );
                                         }
                                         users.getStudents().get(index).show_menu_of_SelectedCourses();
                                         helperMethods.HatSector();
                                     }
                                     if (option == 2) {
-
                                         listOfPresentedCourses();
-
                                     } else if (option == 3) {
                                         System.out.println("Enter the code of course: ");
                                         int code_of_course = sc.nextInt();
                                         System.out.println("Enter the number of group: ");
                                         int number_of_group = sc.nextInt();
-
+                                        boolean boo8 = false;
                                         for (int i = 0; i < users.getStudents().size(); i++) {
-                                            if (users.getStudents().get(i).getUsername().equals(next)) {
-                                                users.getStudents().get(i).addCourse(code_of_course, number_of_group, users.getStudents().get(index).getPersonal_code());
-                                                users.databaseOfCourses.add(new DatabaseOfCourse(users.getStudents().get(i).getPersonal_code(), code_of_course));
+                                            if(!helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(),code_of_course,users)){
+                                                System.out.println(RED+"Error:"+RESET+" This course has time interference with other selected courses.");
 
                                             }
+                                            if(!users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code())){
+                                                System.out.println(RED+"Error:"+RESET+" You have unit limit on general courses. Sum of these units most be less than 5.");
+                                            }
+                                            if(!users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code())){
+                                                System.out.println(RED+"Error:"+RESET+" You have unit limit. Sum of units most be less than 20.");
+                                            }
+                                            if(users.coursesList.get(i).getCapacity()==users.coursesList.get(i).getMax_capacity()){
+                                                System.out.println(RED+"Error:"+RESET+" The capacity of course is fulled!");
+                                            }
+                                            if (users.coursesList.get(i).getCapacity()<users.coursesList.get(i).getMax_capacity()&&users.getStudents().get(i).getUsername().equals(next) && users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code()) && users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code())&& helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(),code_of_course,users)) {
+                                                users.getStudents().get(i).addCourse(code_of_course, number_of_group, users.getStudents().get(index).getPersonal_code());
+                                                users.databaseOfCourses.add(new DatabaseOfCourse(users.getStudents().get(i).getPersonal_code(), code_of_course));
+                                                boo8=true;
+                                            }
+                                        }
+                                        if(!boo8){
+                                            System.out.println(RED+"Error: "+RESET+"The Entered Code Is Wrong. Try Again!");
                                         }
                                         helperMethods.HatSector();
                                     } else if (option == 4) {
@@ -395,7 +408,14 @@ public class Application {
                                         int code_of_course = sc.nextInt();
                                         System.out.println("Enter the number of group: ");
                                         int number_of_group = sc.nextInt();
-                                        users.getStudents().get(index).deleteCourse(code_of_course, number_of_group);
+                                        boolean boo7 = true;
+                                        for (int i = 0; i < users.getStudents().get(index).selected_courses.size(); i++) {
+                                            if(users.getStudents().get(index).selected_courses.get(i).getCode_of_Course()==code_of_course && users.getStudents().get(index).selected_courses.get(i).getNumber_of_group()==number_of_group){
+                                                boo7 =true;
+                                            }else boo7 = false;
+                                        }
+                                        if(boo7)users.getStudents().get(index).deleteCourse(code_of_course, number_of_group);
+                                        else System.out.println(RED+"Error: "+RESET+"The Course Is Not Found");
                                         helperMethods.HatSector();
                                     } else if (option == 5) {
                                         System.out.println("Your full name is: " + users.getStudents().get(index).getFull_name());
@@ -413,10 +433,11 @@ public class Application {
                                         } else System.out.print("Entrance exam");
                                         System.out.println();
                                         helperMethods.HatSector();
-                                    } else if (option == 7) {
+                                    } else if (option == 6) {
                                         helperMethods.ContactUs();
                                         helperMethods.HatSector();
-                                    } else if (option == 8) {
+                                    } else if (option == 7) {
+                                        boo3 = false;
                                         System.out.println(YELLOW + "You logged out." + RESET + " Have a good time!");
                                         helperMethods.HatSector();
                                         break;
@@ -424,6 +445,7 @@ public class Application {
 
                                 }
                             } else {
+
                                 System.out.println("Maybe your username or password is incorrect. Try again!");
                                 helperMethods.HatSector();
 
@@ -564,7 +586,9 @@ public class Application {
     public static void addDefaultCoursesToFile() {
         FileManager fileManager = new FileManager();
         for (int i = 0; i < users.coursesList.size(); i++) {
-            fileManager.createCoursesLogs(users.coursesList.get(i).getName_of_Lecturer(), users.coursesList.get(i).getName_of_Course(), users.coursesList.get(i).getCode_of_Course(), users.coursesList.get(i).getNumber_of_units(), users.coursesList.get(i).isGeneral(), users.coursesList.get(i).getDate_of_class(), users.coursesList.get(i).getDate_of_exam(), users.coursesList.get(i).getStarting_time_of_class(), users.coursesList.get(i).getFinishing_time_of_class(), users.coursesList.get(i).getStarting_time_of_exam(), users.coursesList.get(i).getFinishing_time_of_exam(), users
+            fileManager.createCoursesLogs(users.coursesList.get(i).getName_of_Lecturer(), users.coursesList.get(i).getName_of_Course(), users.coursesList.get(i).getCode_of_Course(), users.coursesList.get(i).getNumber_of_units(),
+                    users.coursesList.get(i).isGeneral(), users.coursesList.get(i).getDate_of_class(), users.coursesList.get(i).getDate_of_exam(), users.coursesList.get(i).getStarting_time_of_class(), users.coursesList.get(i).getFinishing_time_of_class()
+                    , users.coursesList.get(i).getStarting_time_of_exam(), users.coursesList.get(i).getFinishing_time_of_exam(), users
                     .coursesList.get(i).getCapacity(), users.coursesList.get(i).getMax_capacity(), users.coursesList.get(i).getNumber_of_group());
         }
     }

@@ -1,4 +1,4 @@
-package components;
+package components.maincontent;
 
 import components.working_with_file_and_folders.FileManager;
 
@@ -114,39 +114,47 @@ public class Users {
             boolean isOlympiad = false;
             System.out.println("account is successfully created!");
             helperMethods.HatSector();
-            System.out.println("Enter your full name: ");
-            //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
-            String q = sc2.nextLine();
-            int default_id = 402100000;
+            a: while (true){
+                System.out.println("Enter your full name: ");
+                //Bug: بعد اولین بار که اسم کامل رو میگیره، بار دوم به بعد نمیگیره!
+                String q = sc2.nextLine();
+                int default_id = 402100000;
+                if(q.equals("0"))continue a;
+                b: while (true){
+                    System.out.println("Have you entered as a pardis student?");
+                    System.out.println("1. yes");
+                    System.out.println("2. no");
+                    int yes_or_no = sc.nextInt();
+                    if (yes_or_no == 1) {
+                        default_id = 402170000;
+                        System.out.println("fine! :)");
+                        isPardis = true;
+                    }
+                    if (yes_or_no==0) continue a;
+                    c: while (true){
+                        System.out.println("Have you entered as a medalist student?");
+                        System.out.println("1. yes");
+                        System.out.println("2. no");
+                        int yes_or_no1 = sc.nextInt();
+                        if (yes_or_no1 == 1 && yes_or_no != 1) {
+                            default_id = 402110000;
+                            System.out.println("fine! :)");
+                            isOlympiad = true;
+                        } else if (yes_or_no == 1 && yes_or_no1 == 1) {
+                            default_id = 402171000;
+                            System.out.println("fine! :)");
+                        }
+                        else if(yes_or_no1==0) continue b;
 
-            System.out.println("Have you entered as a pardis student?");
-            System.out.println("1. yes");
-            System.out.println("2. no");
-            int yes_or_no = sc.nextInt();
-            if (yes_or_no == 1) {
-                default_id = 402170000;
-                System.out.println("fine! :)");
-                isPardis = true;
+                        Integer personal_code = default_id + random.nextInt(1, 999);
+                        System.out.println("Your personal code is: " +"\u001B[33m"+ personal_code + "\u001B[0m");
+                        students.add(new Student(next, next1, q, personal_code, isPardis, isOlympiad));
+                        fileManager.createUserFolderOnUserSignupIfStudent(next, next1, q, personal_code, isPardis, isOlympiad);
+                        System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
+                        break a;
+                    }
+                }
             }
-            System.out.println("Have you entered as a medalist student?");
-            System.out.println("1. yes");
-            System.out.println("2. no");
-            int yes_or_no1 = sc.nextInt();
-            if (yes_or_no1 == 1 && yes_or_no != 1) {
-                default_id = 402110000;
-                System.out.println("fine! :)");
-                isOlympiad = true;
-            } else if (yes_or_no == 1 && yes_or_no1 == 1) {
-                default_id = 402171000;
-                System.out.println("fine! :)");
-
-            }
-
-            Integer personal_code = default_id + random.nextInt(1, 999);
-            System.out.println("Your personal code is: " +"\u001B[33m"+ personal_code + "\u001B[0m");
-            students.add(new Student(next, next1, q, personal_code, isPardis, isOlympiad));
-            fileManager.createUserFolderOnUserSignupIfStudent(next, next1, q, personal_code, isPardis, isOlympiad);
-            System.out.println("\u001B[32m"+"Your registration is done!"+" You should log In to continue."+"\u001B[0m");
         }
     }
 

@@ -1,4 +1,4 @@
-package components;
+package components.maincontent;
 
 public abstract class Client {
     private String username;

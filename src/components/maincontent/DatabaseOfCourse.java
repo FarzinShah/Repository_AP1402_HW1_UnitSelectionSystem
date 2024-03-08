@@ -1,4 +1,4 @@
-package components;
+package components.maincontent;
 
 import java.util.LinkedList;
 
