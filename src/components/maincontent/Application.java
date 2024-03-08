@@ -121,139 +121,166 @@ public class Application {
                                         listOfPresentedCourses();
                                     }
                                     if (option == 2) {
-                                        a: while (true){
+                                        a:
+                                        while (true) {
                                             System.out.println("Enter the name of Lecturer: ");
                                             String name_of_Lecturer = sc4.nextLine();
-                                           b: while (true){
-                                               System.out.println("Enter the name of Course: ");
-                                               String name_of_Course = sc3.nextLine();
-                                               if(name_of_Course.equals("0")){
-                                                   continue a;
-                                               }
-                                               c: while (true){
-                                                   System.out.println("Enter the code of Course: ");
-                                                   int code_of_Course = sc2.nextInt();
-                                                   if (code_of_Course==0){
-                                                       continue b;
-                                                   }
-                                                   d: while (true){
-                                                       System.out.println("Enter the number of units: ");
-                                                       int number_of_units = sc.nextInt();
-                                                       if(number_of_units==0){
-                                                           continue c;
-                                                       }
-                                                       e: while (true){
-                                                           System.out.println("Is this a general course? ");
-                                                           System.out.println("1. yes");
-                                                           System.out.println("2. no");
-                                                           int isGeneralCount = sc.nextInt();
-                                                           boolean isGeneral = true;
-                                                           if (isGeneralCount == 2) {
-                                                               isGeneral = false;
-                                                           }
-                                                           System.out.print("");
-                                                           if(isGeneralCount==0){
-                                                               continue d;
-                                                           }
-                                                           f: while (true){
-                                                               System.out.println("Enter the date of class: ");
-                                                               String date_of_class = sc3.nextLine();
-                                                               System.out.print("");
-                                                               if(date_of_class.equals("0")){
-                                                                   continue e;
-                                                               }
-                                                               g: while (true){
-                                                                   System.out.println("Enter the starting time of class: ");
-                                                                   Double starting_time_of_class = Double.valueOf(sc3.nextLine());
-                                                                   System.out.print("");
-                                                                   if(starting_time_of_class==0){
-                                                                       continue f;
-                                                                   }
-                                                                   h: while (true){
-                                                                       System.out.println("Enter the finishing time of class: ");
-                                                                       Double finishing_time_of_class = Double.valueOf(sc3.nextLine());
-                                                                       if(finishing_time_of_class==0){
-                                                                           continue g;
-                                                                       }
-                                                                       i: while (true){
-                                                                           System.out.println("Enter the date of exam: ");
-                                                                           System.out.print(" ");
-                                                                           String date_of_exam = sc5.nextLine();
-                                                                           if(date_of_exam.equals("0")){
-                                                                               continue h;
-                                                                           }
-                                                                           j: while (true){
-                                                                               System.out.println("Enter the starting time of exam: ");
-                                                                               Double starting_time_of_exam = Double.valueOf(sc4.next());
-                                                                               if (starting_time_of_exam==0){
-                                                                                   continue i;
-                                                                               }
-                                                                               k: while (true){
-                                                                                   System.out.println("Enter the finishing time of exam: ");
-                                                                                   Double finishing_time_of_exam = Double.valueOf(sc1.next());
-                                                                                   if(finishing_time_of_exam==0){
-                                                                                       continue j;
-                                                                                   }
-                                                                                   l: while (true){
-                                                                                       System.out.println("Enter the capacity of course: ");
-                                                                                       int capacity = sc.nextInt();
-                                                                                       if ((capacity==0)){
-                                                                                           continue k;
-                                                                                       }
-                                                                                       m: while (true){
-                                                                                           System.out.println("Enter the max capacity of course: ");
-                                                                                           int max_capacity = sc.nextInt();
-                                                                                           if(max_capacity==0){
-                                                                                               continue l;
-                                                                                           }
-                                                                                           n: while (true){
-                                                                                               System.out.println("Enter the number of group: ");
-                                                                                               int number_of_group = sc.nextInt();
-                                                                                               if(number_of_group==0){
-                                                                                                   continue m;
-                                                                                               }
-                                                                                               users.coursesList.add(new Course(name_of_Lecturer, name_of_Course, code_of_Course, number_of_units, isGeneral, date_of_class, date_of_exam, starting_time_of_class, finishing_time_of_class, starting_time_of_exam, finishing_time_of_exam, capacity, max_capacity, number_of_group));
-                                                                                               System.out.println("The course added Successfully!");
-                                                                                               helperMethods.HatSector();
-                                                                                               System.out.println("if you want to export the course information, Enter 1 else 2");
-                                                                                               int option5 = sc.nextInt();
-                                                                                               if (option5 == 1) {
-                                                                                                   fileManager.createCoursesLogs(name_of_Lecturer, name_of_Course, code_of_Course, number_of_units, isGeneral, date_of_class, date_of_exam, starting_time_of_class, finishing_time_of_class, starting_time_of_exam, finishing_time_of_exam, capacity, max_capacity, number_of_group);
-                                                                                                   helperMethods.HatSector();
-                                                                                               } else if (option5 == 2) {
-                                                                                                   System.out.println("Fine!");
-                                                                                               }
-                                                                                               break a;
-                                                                                           }
-                                                                                       }
-                                                                                   }
-                                                                               }
-                                                                           }
-                                                                       }
-                                                                   }
-                                                               }
-                                                           }
-                                                       }
-                                                   }
-                                               }
+                                            b:
+                                            while (true) {
+                                                System.out.println("Enter the name of Course: ");
+                                                String name_of_Course = sc3.nextLine();
+                                                if (name_of_Course.equals("0")) {
+                                                    continue a;
+                                                }
+                                                c:
+                                                while (true) {
+                                                    System.out.println("Enter the code of Course: ");
+                                                    int code_of_Course = sc2.nextInt();
+                                                    if (code_of_Course == 0) {
+                                                        continue b;
+                                                    }
+                                                    d:
+                                                    while (true) {
+                                                        System.out.println("Enter the number of units: ");
+                                                        int number_of_units = sc.nextInt();
+                                                        if (number_of_units == 0) {
+                                                            continue c;
+                                                        }
+                                                        e:
+                                                        while (true) {
+                                                            System.out.println("Is this a general course? ");
+                                                            System.out.println("1. yes");
+                                                            System.out.println("2. no");
+                                                            int isGeneralCount = sc.nextInt();
+                                                            boolean isGeneral = true;
+                                                            if (isGeneralCount == 2) {
+                                                                isGeneral = false;
+                                                            }
+                                                            System.out.print("");
+                                                            if (isGeneralCount == 0) {
+                                                                continue d;
+                                                            }
+                                                            f:
+                                                            while (true) {
+                                                                System.out.println("Enter the date of class: ");
+                                                                String date_of_class = sc3.nextLine();
+                                                                System.out.print("");
+                                                                if (date_of_class.equals("0")) {
+                                                                    continue e;
+                                                                }
+                                                                g:
+                                                                while (true) {
+                                                                    System.out.println("Enter the starting time of class: ");
+                                                                    Double starting_time_of_class = Double.valueOf(sc3.nextLine());
+                                                                    System.out.print("");
+                                                                    if (starting_time_of_class == 0) {
+                                                                        continue f;
+                                                                    }
+                                                                    h:
+                                                                    while (true) {
+                                                                        System.out.println("Enter the finishing time of class: ");
+                                                                        Double finishing_time_of_class = Double.valueOf(sc3.nextLine());
+                                                                        if (finishing_time_of_class == 0) {
+                                                                            continue g;
+                                                                        }
+                                                                        i:
+                                                                        while (true) {
+                                                                            System.out.println("Enter the date of exam: ");
+                                                                            System.out.print(" ");
+                                                                            String date_of_exam = sc5.nextLine();
+                                                                            if (date_of_exam.equals("0")) {
+                                                                                continue h;
+                                                                            }
+                                                                            j:
+                                                                            while (true) {
+                                                                                System.out.println("Enter the starting time of exam: ");
+                                                                                Double starting_time_of_exam = Double.valueOf(sc4.next());
+                                                                                if (starting_time_of_exam == 0) {
+                                                                                    continue i;
+                                                                                }
+                                                                                k:
+                                                                                while (true) {
+                                                                                    System.out.println("Enter the finishing time of exam: ");
+                                                                                    Double finishing_time_of_exam = Double.valueOf(sc1.next());
+                                                                                    if (finishing_time_of_exam == 0) {
+                                                                                        continue j;
+                                                                                    }
+                                                                                    l:
+                                                                                    while (true) {
+                                                                                        System.out.println("Enter the capacity of course: ");
+                                                                                        int capacity = sc.nextInt();
+                                                                                        if ((capacity == 0)) {
+                                                                                            continue k;
+                                                                                        }
+                                                                                        m:
+                                                                                        while (true) {
+                                                                                            System.out.println("Enter the max capacity of course: ");
+                                                                                            int max_capacity = sc.nextInt();
+                                                                                            if (max_capacity == 0) {
+                                                                                                continue l;
+                                                                                            }
+                                                                                            n:
+                                                                                            while (true) {
+                                                                                                System.out.println("Enter the number of group: ");
+                                                                                                int number_of_group = sc.nextInt();
+                                                                                                if (number_of_group == 0) {
+                                                                                                    continue m;
+                                                                                                }
+                                                                                                users.coursesList.add(new Course(name_of_Lecturer, name_of_Course, code_of_Course, number_of_units, isGeneral, date_of_class, date_of_exam, starting_time_of_class, finishing_time_of_class, starting_time_of_exam, finishing_time_of_exam, capacity, max_capacity, number_of_group));
+                                                                                                System.out.println("The course added Successfully!");
+                                                                                                helperMethods.HatSector();
+                                                                                                System.out.println("if you want to export the course information, Enter 1 else 2");
+                                                                                                int option5 = sc.nextInt();
+                                                                                                if (option5 == 1) {
+                                                                                                    fileManager.createCoursesLogs(name_of_Lecturer, name_of_Course, code_of_Course, number_of_units, isGeneral, date_of_class, date_of_exam, starting_time_of_class, finishing_time_of_class, starting_time_of_exam, finishing_time_of_exam, capacity, max_capacity, number_of_group);
+                                                                                                    helperMethods.HatSector();
+                                                                                                } else if (option5 == 2) {
+                                                                                                    System.out.println("Fine!");
+                                                                                                }
+                                                                                                break a;
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                         //دستی باید تایپ کنه! کپی پیست کنه باگ میخوره.
                                     }
                                     if (option == 3) {
-                                        System.out.println("Enter the personal code of student: ");
-                                        int personal_code = sc.nextInt();
-                                        System.out.println("The presented courses are these: ");
-                                        listOfPresentedCourses();
-                                        helperMethods.HatSector();
-                                        System.out.println("Enter the code of course: ");
-                                        int code_of_course = sc.nextInt();
-                                        System.out.println("Enter the number of group: ");
-                                        int number_of_group = sc.nextInt();
-                                        for (int i = 0; i < users.getStudents().size(); i++) {
-                                            if (users.getStudents().get(i).getPersonal_code() == personal_code) {
-                                                users.getStudents().get(i).addCourse(code_of_course, number_of_group, users.getStudents().get(i).getPersonal_code());
-                                                System.out.println("The course added Successfully!");
+                                        a:
+                                        while (true) {
+                                            System.out.println("Enter the personal code of student: ");
+                                            int personal_code = sc.nextInt();
+                                            if (personal_code == 0) continue a;
+                                            b:
+                                            while (true) {
+                                                System.out.println("The presented courses are these: ");
+                                                listOfPresentedCourses();
+                                                helperMethods.HatSector();
+                                                System.out.println("Enter the code of course: ");
+                                                int code_of_course = sc.nextInt();
+                                                if (code_of_course == 0) continue a;
+                                                c:
+                                                while (true) {
+                                                    System.out.println("Enter the number of group: ");
+                                                    int number_of_group = sc.nextInt();
+                                                    if (number_of_group == 0) continue b;
+                                                    for (int i = 0; i < users.getStudents().size(); i++) {
+                                                        if (users.getStudents().get(i).getPersonal_code() == personal_code) {
+                                                            users.getStudents().get(i).addCourse(code_of_course, number_of_group, users.getStudents().get(i).getPersonal_code());
+                                                            System.out.println("The course added Successfully!");
+                                                            break a;
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -343,6 +370,9 @@ public class Application {
                                     }
 
                                 }
+                            } else {
+                                System.out.println(RED + "Error: " + RESET + "Username or Passcode is wrong! Try Again!");
+                                helperMethods.HatSector();
                             }
                         }
                         if (next.charAt(0) == 'S') {
@@ -366,7 +396,7 @@ public class Application {
                                     int option = sc.nextInt();
                                     if (option == 1) {
                                         if (users.getStudents().get(index).selected_courses.isEmpty()) {
-                                            System.out.println(RED + "Error:" + RESET + "You have selected any course yet!" );
+                                            System.out.println(RED + "Error:" + RESET + "You have selected any course yet!");
                                         }
                                         users.getStudents().get(index).show_menu_of_SelectedCourses();
                                         helperMethods.HatSector();
@@ -380,27 +410,27 @@ public class Application {
                                         int number_of_group = sc.nextInt();
                                         boolean boo8 = false;
                                         for (int i = 0; i < users.getStudents().size(); i++) {
-                                            if(!helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(),code_of_course,users)){
-                                                System.out.println(RED+"Error:"+RESET+" This course has time interference with other selected courses.");
+                                            if (!helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(), code_of_course, users)) {
+                                                System.out.println(RED + "Error:" + RESET + " This course has time interference with other selected courses.");
 
                                             }
-                                            if(!users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code())){
-                                                System.out.println(RED+"Error:"+RESET+" You have unit limit on general courses. Sum of these units most be less than 5.");
+                                            if (!users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code())) {
+                                                System.out.println(RED + "Error:" + RESET + " You have unit limit on general courses. Sum of these units most be less than 5.");
                                             }
-                                            if(!users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code())){
-                                                System.out.println(RED+"Error:"+RESET+" You have unit limit. Sum of units most be less than 20.");
+                                            if (!users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code())) {
+                                                System.out.println(RED + "Error:" + RESET + " You have unit limit. Sum of units most be less than 20.");
                                             }
-                                            if(users.coursesList.get(i).getCapacity()==users.coursesList.get(i).getMax_capacity()){
-                                                System.out.println(RED+"Error:"+RESET+" The capacity of course is fulled!");
+                                            if (users.coursesList.get(i).getCapacity() == users.coursesList.get(i).getMax_capacity()) {
+                                                System.out.println(RED + "Error:" + RESET + " The capacity of course is fulled!");
                                             }
-                                            if (users.coursesList.get(i).getCapacity()<users.coursesList.get(i).getMax_capacity()&&users.getStudents().get(i).getUsername().equals(next) && users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code()) && users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code())&& helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(),code_of_course,users)) {
+                                            if (users.coursesList.get(i).getCapacity() < users.coursesList.get(i).getMax_capacity() && users.getStudents().get(i).getUsername().equals(next) && users.getStudents().get(i).isLessThan20(users.getStudents().get(i).getPersonal_code()) && users.getStudents().get(i).isLessThan5General(users.getStudents().get(i).getPersonal_code()) && helperMethods.courseInterference(users.getStudents().get(i).getPersonal_code(), code_of_course, users)) {
                                                 users.getStudents().get(i).addCourse(code_of_course, number_of_group, users.getStudents().get(index).getPersonal_code());
                                                 users.databaseOfCourses.add(new DatabaseOfCourse(users.getStudents().get(i).getPersonal_code(), code_of_course));
-                                                boo8=true;
+                                                boo8 = true;
                                             }
                                         }
-                                        if(!boo8){
-                                            System.out.println(RED+"Error: "+RESET+"The Entered Code Is Wrong. Try Again!");
+                                        if (!boo8) {
+                                            System.out.println(RED + "Error: " + RESET + "The Entered Code Is Wrong. Try Again!");
                                         }
                                         helperMethods.HatSector();
                                     } else if (option == 4) {
@@ -410,12 +440,13 @@ public class Application {
                                         int number_of_group = sc.nextInt();
                                         boolean boo7 = true;
                                         for (int i = 0; i < users.getStudents().get(index).selected_courses.size(); i++) {
-                                            if(users.getStudents().get(index).selected_courses.get(i).getCode_of_Course()==code_of_course && users.getStudents().get(index).selected_courses.get(i).getNumber_of_group()==number_of_group){
-                                                boo7 =true;
-                                            }else boo7 = false;
+                                            if (users.getStudents().get(index).selected_courses.get(i).getCode_of_Course() == code_of_course && users.getStudents().get(index).selected_courses.get(i).getNumber_of_group() == number_of_group) {
+                                                boo7 = true;
+                                            } else boo7 = false;
                                         }
-                                        if(boo7)users.getStudents().get(index).deleteCourse(code_of_course, number_of_group);
-                                        else System.out.println(RED+"Error: "+RESET+"The Course Is Not Found");
+                                        if (boo7)
+                                            users.getStudents().get(index).deleteCourse(code_of_course, number_of_group);
+                                        else System.out.println(RED + "Error: " + RESET + "The Course Is Not Found");
                                         helperMethods.HatSector();
                                     } else if (option == 5) {
                                         System.out.println("Your full name is: " + users.getStudents().get(index).getFull_name());
@@ -583,13 +614,14 @@ public class Application {
 //        }
 
     }
+
     public static void addDefaultCoursesToFile() {
         FileManager fileManager = new FileManager();
         for (int i = 0; i < users.coursesList.size(); i++) {
             fileManager.createCoursesLogs(users.coursesList.get(i).getName_of_Lecturer(), users.coursesList.get(i).getName_of_Course(), users.coursesList.get(i).getCode_of_Course(), users.coursesList.get(i).getNumber_of_units(),
                     users.coursesList.get(i).isGeneral(), users.coursesList.get(i).getDate_of_class(), users.coursesList.get(i).getDate_of_exam(), users.coursesList.get(i).getStarting_time_of_class(), users.coursesList.get(i).getFinishing_time_of_class()
                     , users.coursesList.get(i).getStarting_time_of_exam(), users.coursesList.get(i).getFinishing_time_of_exam(), users
-                    .coursesList.get(i).getCapacity(), users.coursesList.get(i).getMax_capacity(), users.coursesList.get(i).getNumber_of_group());
+                            .coursesList.get(i).getCapacity(), users.coursesList.get(i).getMax_capacity(), users.coursesList.get(i).getNumber_of_group());
         }
     }
 }
